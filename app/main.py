@@ -1,12 +1,25 @@
 from fastapi import FastAPI
 
+
 from app.api.auth import router as auth_router
 from app.api.onboarding import router as onboarding_router
 from app.api.chat import router as chat_router
+from app.api.roadmap import router as roadmap_router
+from app.api.dashboard import router as dashboard_router
+from app.api.interview import router as interview_router
+from app.api.resume import router as resume_router
 
 app = FastAPI(
-    title="AI Mentor"
+    title="AI Mentor",
+    version="1.0.0"
 )
+
+@app.get("/")
+def home():
+    return {
+        "message": "AI Mentor Backend Running Successfully 🚀"
+    }
+
 
 app.include_router(
     auth_router,
@@ -14,11 +27,13 @@ app.include_router(
     tags=["Authentication"]
 )
 
+
 app.include_router(
     onboarding_router,
     prefix="/api/onboarding",
     tags=["Onboarding"]
 )
+
 
 app.include_router(
     chat_router,
@@ -26,8 +41,28 @@ app.include_router(
     tags=["AI Chat"]
 )
 
-@app.get("/")
-def home():
-    return {
-        "message": "Backend Running"
-    }
+
+app.include_router(
+    roadmap_router,
+    prefix="/api/roadmap",
+    tags=["Roadmap"]
+)
+
+
+app.include_router(
+    dashboard_router,
+    prefix="/api/dashboard",
+    tags=["Dashboard"]
+)
+
+app.include_router(
+    interview_router,
+    prefix="/api/interview",
+    tags=["Mock Interview"]
+)
+
+app.include_router(
+    resume_router,
+    prefix="/api/resume",
+    tags=["Resume Analysis"]
+)
