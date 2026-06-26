@@ -1,0 +1,6 @@
+.env
+ai_mentor.db
+*.pdf
+__pycache__/
+*.pyc
+app/test_key.py

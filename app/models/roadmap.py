@@ -1,11 +1,22 @@
-from sqlalchemy import Column, Integer, Text, DateTime, ForeignKey
-from sqlalchemy.sql import func
+from sqlalchemy import Column, Integer, String, Text
 from app.database import Base
+
 
 class Roadmap(Base):
     __tablename__ = "roadmaps"
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"))
-    roadmap_content = Column(Text, nullable=False)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    filename = Column(String)
+
+    resume_summary = Column(Text)
+
+    missing_skills = Column(Text)
+
+    roadmap_content = Column(Text)
+
+    progress_percentage = Column(Integer, default=0)
+
+    completed_tasks = Column(Integer, default=0)
+
+    pending_tasks = Column(Integer, default=0)
